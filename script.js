@@ -16,7 +16,7 @@ resposta.innerHTML = "";
         const img = document.createElement("img");
         img.src = "abaixo.png";   // imagem para este caso
         resposta.appendChild(img);
-
+ 
     } else if (imc >= 18.5 && imc < 24.9) {
         resposta.textContent = nome + " está com peso normal. IMC: " + imc.toFixed(2);
 
