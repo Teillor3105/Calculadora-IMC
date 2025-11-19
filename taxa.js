@@ -1,16 +1,37 @@
 function cliqueAqui() {
-  let nome = document.getElementById("nome").value;
-  let peso = document.getElementById("Peso").value
-  let altura = document.getElementById("Altura").value
-  let idade = document.getElementById("Idade").value
-  let resposta = document.getElementById("resposta");
+    let nome = document.getElementById("nome").value;
+    let peso = parseFloat(document.getElementById("Peso").value);
+    let altura = parseFloat(document.getElementById("Altura").value);
+    let idade = parseInt(document.getElementById("Idade").value);
+    let resposta = document.getElementById("resposta");
 
-resposta.innerHTML = "";
+    // pegar sexo selecionado
+    let sexo = document.querySelector("input[name='sexo']:checked");
 
-let basal = 66 + (13,7*peso) + (5,0 * altura) - (6,8 * idade);
 
-resposta.textContent = nome + " está com a taxa metabolica basal de " + basal.toFixed(2);
+     if (nome === "" || peso === "" || altura === "" || idade === "" || !sexo) {
+        alert("Por favor, preencha todos os campos antes de calcular.");
+        return;
+     }
+    if (!sexo) {
+        resposta.textContent = "Selecione o sexo.";
+        return;
+    }
 
+    sexo = sexo.value;
+
+    let basal = 0;
+
+    if (sexo === "Masculino") {
+        // Fórmula para homens
+        basal = 66 + (13.7 * peso) + (5 * altura) - (6.8 * idade);
+    } else {
+        // Fórmula para mulheres
+        basal = 655 + (9.6 * peso) + (1.8 * altura) - (4.7 * idade);
+    }
+
+    resposta.textContent =
+        `${nome} tem uma taxa metabólica basal de ${basal.toFixed(2)} kcal/dia.`;
 }
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
